@@ -8,6 +8,7 @@ const User = require('../models/user')
 const Upload = require('../models/upload')
 
 module.exports = async function handleDocument(ctx) {
+
   const allowedExtensions = { 
     'image/svg+xml': 'svg', 
     'image/png': 'png', 
@@ -15,6 +16,12 @@ module.exports = async function handleDocument(ctx) {
   }
   const currentUser = await User.findOrCreate(ctx.update.message.from)
   const currentUserId = currentUser.user_id
+  
+  const countLastFor24h = await Upload.countLastByUserId(currentUserId, 3600 * 60)
+
+  if(countLastFor24h >= 100) {
+    return serviceMessages.limit24Expired(ctx)
+  }
 
   const loading = await serviceMessages.loading(ctx)
 

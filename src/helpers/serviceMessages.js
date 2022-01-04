@@ -7,6 +7,9 @@ function imageIsTooLarge(ctx) {
 function limitExpired(ctx) {
   return ctx.reply('😒 Вы исчерпали лимит на оптимизацию картинок этого формата, подождите немного и попробуйте снова')
 }
+function limit24Expired(ctx) {
+  return ctx.reply('😒 За последние 24 часа вы исчерпали лимит на оптимизацию картинок, подождите немного и попробуйте снова')
+}
 function totalLimitExpired(ctx) {
   return ctx.reply('😒 Вы исчерпали лимит на оптимизацию картинок, подождите немного и попробуйте снова')
 }
@@ -21,5 +24,5 @@ function unknownError(ctx) {
 }
 
 module.exports = {
-  notImage, imageIsTooLarge, limitExpired, totalLimitExpired, loading, unknownError, inlineImage
+  notImage, imageIsTooLarge, limitExpired, totalLimitExpired, limit24Expired, loading, unknownError, inlineImage
 }

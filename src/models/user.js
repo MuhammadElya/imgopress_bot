@@ -27,7 +27,10 @@ async function findOrCreate(data, plan = 1) {
   }
 }
 async function remove(user_id) {
-  return await User.findOneAndUpdate({ user_id}, { $set: { deleted: true } }, { new: true }).exec()
+  return await User.findOneAndUpdate(
+    { user_id },
+    { $set: { deleted: true } },
+    { new: true }).exec()
 }
 
 module.exports = { User, findOrCreate, remove }
