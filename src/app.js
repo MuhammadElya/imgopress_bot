@@ -1,7 +1,7 @@
 const dotenv = require('dotenv').config({ path: `${__dirname}/../.env` })
 
 const mongoose = require('mongoose')
-const { Telegraf } = require('Telegraf')
+const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 const handleDocument = require('./handlers/handleDocument')
 const handlePhotoInline = require('./handlers/handlePhotoInline')
