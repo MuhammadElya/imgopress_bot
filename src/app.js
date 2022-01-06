@@ -22,7 +22,12 @@ bot.on('text', handleStart)
 bot.on('start', handleStart)
 bot.on('stop', handleQuit)
 
-bot.launch()
+bot.launch({
+  webhook: {
+    domain: process.env.DOMAIN,
+    port: process.env.PORT
+  }
+})
 
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
