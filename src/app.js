@@ -22,12 +22,11 @@ bot.on('text', handleStart)
 bot.on('start', handleStart)
 bot.on('stop', handleQuit)
 
-bot.launch({
-  webhook: {
-    domain: process.env.DOMAIN,
-    port: process.env.PORT
-  }
-})
+const webhookToken = [...Array(30)].map(() => Math.random().toString(36)[2]).join('')
+bot.telegram.setWebhook(`${process.env.DOMAIN}${webhookToken}`)
+bot.startWebhook(`/${webhookToken}`, null, process.env.LOCAL_PORT)
+
+bot.launch()
 
 process.once('SIGINT', () => bot.stop('SIGINT'))
 process.once('SIGTERM', () => bot.stop('SIGTERM'))
